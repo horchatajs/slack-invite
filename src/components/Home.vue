@@ -1,8 +1,7 @@
 <template>
   <div class="flex justify-center items-center h-screen row">
-    <svg class="absolute w-screen h-screen" viewBox="0 0 768 373" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    <svg class="absolute xs: w-full lg:w-screen h-screen" viewBox="0 0 768 373" version="1.1" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink">
-      <desc>Created with Sketch.</desc>
       <defs>
         <path d="M-218.863184,512.454253 C-231.649601,538.591446 -198.24791,562.000798 -211.580626,587.89288 C-220.648336,612.024386 -255.325442,627.239674 -249.318299,653.728982 C-237.996567,703.660324 -171.43202,792.647284 -116.627868,760.933173 C-27.1337045,709.146372 -25.1485617,708.821246 73.7638085,760.933173 C107.743378,778.83529 172.422579,810.513981 146.004487,863.565867 C125.199944,905.342678 199.285981,910.449085 246.803274,913.566994 C414.046164,924.549517 587.403736,899.218816 714.523732,810.520512 C910.546276,673.74896 952.516694,436.462151 887.614607,253.89714 C881.476266,236.633995 840.129576,281.212444 830.007981,303.351439 C797.759111,373.879954 792.562815,512.087905 655.383597,489.342723 C578.256447,476.552182 496.530919,492.985115 484.099382,563.60324 C478.434215,595.783851 514.765275,664.271361 464.961697,663.44642 C401.59527,662.394818 367.95054,563.352858 310.743961,593.938935 C149.695332,680.04276 54.1424071,520.674673 -53.2333827,466.913812 C-79.3202539,453.851804 -106.747064,436.488506 -139.64117,440.144076 C-181.42447,444.782723 -172.976186,483.088457 -201.185882,502.475891 C-209.414786,507.156708 -215.355254,509.252005 -218.863184,512.454253 Z"
           id="path-1"></path>
@@ -21,8 +20,16 @@
         </g>
       </g>
     </svg>
-      <div class="absolute pin-t pin-x text-center pt-8">
-        Hola
+      <div class="absolute pin-t pin-x text-center pt-8 px-8">
+        <div class="flex justify-center items-center">
+          <p class="font-bold text-2xl">Unete a nuestro Team de
+          <a href="https://slack.com/" target="_blank" class="-mx-2">
+            <img src="~@/assets/slack.svg" alt="" class="h-auto w-32 align-middle">
+          </a>
+          para aprender de
+          <img src="~@/assets/javascript.svg" alt="" class="h-auto w-10 mx-2 align-middle mb-2">
+          y Tecnologías web relacionadas.</p>
+        </div>
       </div>
     <div class="relative w-1/4">
       <svg class="w-1/3 mx-auto block mb-12" viewBox="0 0 193 300" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +57,7 @@
         </g>
       </svg>
       <form action="">
-        <input type="text" name="" id="" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 focus:border-black">
+        <input type="text" name="" id="" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 focus:border-black" placeholder="Ingresa tu Correo Electrónico">
         <button type="submit" class="bg-black text-white w-full py-2 border-black border-2 shadow text-lg tracking-wide">Obtener Invitación</button>
       </form>
     </div>
