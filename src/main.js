@@ -3,9 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
 import '@/assets/js/fa'
+import '@/assets/js/validate'
 
 Vue.config.productionTip = false
+
+window.axios = axios
 
 /* eslint-disable no-new */
 new Vue({

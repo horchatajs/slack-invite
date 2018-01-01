@@ -56,9 +56,18 @@
           </g>
         </g>
       </svg>
-      <form action="">
-        <input type="text" name="" id="" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 focus:border-black" placeholder="Ingresa tu Correo Electrónico">
-        <button type="submit" class="bg-black text-white w-full py-2 border-black border-2 shadow text-lg tracking-wide">Obtener Invitación</button>
+      <form @submit.prevent="invite">
+        <input type="text"
+               name="email"
+               id="email"
+               :class="{'input': true, 'border-red border-2': errors.has('email') }"
+               class="shadow appearance-none rounded w-full py-2 px-3 text-grey-darker mb-2 focus:border-black"
+               placeholder="Ingresa tu Correo Electrónico"
+               v-validate="'required|email'"
+               v-model="email">
+        <p v-if="errors.has('email')" class="text-red text-xs italic">{{ errors.first('email') }}</p>
+        <p v-else class="text-transparent text-xs italic">placeholder</p>
+        <button type="submit" class="bg-black text-white w-full py-2 border-black border-2 shadow text-lg tracking-wide mt-2">Obtener Invitación</button>
       </form>
     </div>
     <div class="absolute pin-b pin-x text-center mb-8">
@@ -86,8 +95,32 @@
 </template>
 
 <script>
+  import qs from 'qs'
   export default {
-
+    data () {
+      return {
+        email: ''
+      }
+    },
+    methods: {
+      invite () {
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            window.axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+            window.axios.post('https://twoquethre.slack.com/api/users.admin.invite', qs.stringify({
+              email: this.email,
+              token: 'xoxp-18681543633-18678959923-293798350087-54529e6612338a2b8787e354d7f72cc8'
+            }))
+            .then(res => {
+              console.log('succes', res.data)
+            })
+            .catch(e => {
+              console.log('error', e)
+            })
+          }
+        })
+      }
+    }
   }
 </script>
 
