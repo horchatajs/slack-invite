@@ -84,6 +84,7 @@
                   class="shadow appearance-none rounded w-70 py-2 px-3 text-grey-darker mb-2 focus:border-black"
                   placeholder="Ingresa tu Correo Electrónico"
                   v-validate="'required|email'"
+                  data-vv-as="Correo Electrónico"
                   v-model="email">
             <p v-if="errors.has('email')" class="text-red text-xs italic">{{ errors.first('email') }}</p>
             <p v-else class="text-transparent text-xs italic">placeholder</p>
@@ -118,10 +119,17 @@
 
 <script>
   import qs from 'qs'
+  import notie from 'notie'
   export default {
     data () {
       return {
-        email: ''
+        email: '',
+        messages: [
+          {'key': 'already_invited', 'value': 'Ya recibiste una invitación por correo electrónico'},
+          {'key': 'already_in_team', 'value': 'Ya eres parte del equipo'},
+          {'key': 'user_disabled', 'value': 'Tu usuario ha sido deshabilitado'},
+          {'key': 'invalid_email', 'value': 'Correo Electrónico invalido'}
+        ]
       }
     },
     methods: {
@@ -134,13 +142,25 @@
               token: 'xoxp-18681543633-18678959923-293798350087-54529e6612338a2b8787e354d7f72cc8'
             }))
             .then(res => {
-              console.log('succes', res.data)
+              if (res.data.error) {
+                this.noti(3, this.get_message(res.data.error))
+              } else {
+                this.noti(1, 'Invitación enviada con exito')
+              }
             })
             .catch(e => {
               console.log('error', e)
             })
           }
         })
+      },
+      noti (_type, message) {
+        return notie.alert({ type: _type, text: message })
+      },
+      get_message (key) {
+        return this.messages.find((item) => {
+          return item.key === key
+        })['value']
       }
     }
   }
