@@ -134,12 +134,13 @@
     },
     methods: {
       invite () {
+        console.log(process.env.SLACK_URL)
         this.$validator.validateAll().then((result) => {
           if (result) {
             window.axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-            window.axios.post('https://twoquethre.slack.com/api/users.admin.invite', qs.stringify({
+            window.axios.post(process.env.SLACK_URL, qs.stringify({
               email: this.email,
-              token: 'xoxp-18681543633-18678959923-293798350087-54529e6612338a2b8787e354d7f72cc8'
+              token: process.env.SLACK_TOKEN
             }))
             .then(res => {
               if (res.data.error) {
