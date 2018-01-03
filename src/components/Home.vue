@@ -22,22 +22,6 @@
       </g>
     </svg>
 
-<!-- <svg class="absolute h-screen w-screen" width="1200px" height="461px" viewBox="0 0 1200 461" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMaxYMax slice">
-    <defs>
-        <path d="M-438.22357,1026.07267 C-463.825451,1078.40644 -396.946189,1125.27832 -423.64191,1177.1213 C-441.797928,1225.43914 -511.230919,1255.90428 -499.202987,1308.94307 C-476.533803,1408.91919 -343.253491,1587.09526 -233.520685,1523.59499 C-54.3290498,1419.90375 -50.3542546,1419.25275 147.69519,1523.59499 C215.731522,1559.4399 345.236859,1622.86924 292.34066,1729.09354 C250.684311,1812.74207 399.02469,1822.96648 494.167223,1829.20938 C829.032937,1851.19938 1176.1419,1800.48043 1430.67068,1622.88232 C1823.16108,1349.02851 1907.19727,873.915833 1777.24565,508.371071 C1764.95502,473.805562 1682.16771,563.063731 1661.90153,607.392017 C1597.33053,748.609269 1586.92613,1025.33914 1312.25606,979.797109 C1157.82655,954.18697 994.189832,987.090167 969.298516,1128.48684 C957.955311,1192.92117 1030.69997,1330.05178 930.97967,1328.40002 C804.102863,1326.29443 736.736971,1127.98551 622.193854,1189.22715 C299.730734,1361.6304 108.407812,1042.53219 -106.587698,934.888334 C-158.820703,908.734646 -213.73663,873.968605 -279.599569,881.288049 C-363.26109,890.57588 -346.345331,967.274368 -402.828808,1006.09328 C-419.305309,1015.46555 -431.19974,1019.6609 -438.22357,1026.07267 Z" id="path-1"></path>
-    </defs>
-    <g id="Index" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Cover" transform="translate(0.000000, -167.000000)">
-            <g id="Shape" transform="translate(468.069950, 280.399122) scale(-1, 1) rotate(81.000000) translate(-468.069950, -280.399122) translate(-198.930050, -887.100878)">
-                <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                </mask>
-                <use id="Clip-2" fill="#F8E71C" transform="translate(666.715209, 1167.309071) scale(-1, 1) rotate(90.000000) translate(-666.715209, -1167.309071) " xlink:href="#path-1"></use>
-            </g>
-        </g>
-    </g>
-</svg> -->
-
     <div class="relative flex flex-col justify-center my-4">
       <div class="pin-t pin-x text-center px-8">
         <div class="flex justify-center items-center">
@@ -76,19 +60,19 @@
               </g>
             </g>
           </svg>
-          <form @submit.prevent="invite">
+          <form @submit.prevent="invite" class="w-80 mx-auto">
             <input type="text"
                   name="email"
                   id="email"
                   :class="{'input': true, 'border-red border-2': errors.has('email') }"
-                  class="shadow appearance-none rounded w-70 py-2 px-3 text-grey-darker mb-2 focus:border-black"
+                  class="shadow-lg appearance-none rounded w-full h-16 py-2 px-3 text-grey-darker mb-2 focus:border-black"
                   placeholder="Ingresa tu correo electrónico"
                   v-validate="'required|email'"
                   data-vv-as="Correo electrónico"
                   v-model="email">
             <p v-if="errors.has('email')" class="text-red text-xs italic">{{ errors.first('email') }}</p>
             <p v-else class="text-transparent text-xs italic">placeholder</p>
-            <button type="submit" class="bg-black text-white w-70 py-2 border-black border-2 shadow text-lg tracking-wide mt-2">Obtener Invitación</button>
+            <button type="submit" class="bg-black text-white rounded w-full h-12 py-2 border-black border-2 shadow text-lg tracking-wide mt-2">Obtener Invitación</button>
           </form>
       </div>
 
@@ -137,7 +121,6 @@ export default {
   },
   methods: {
     invite() {
-      console.log(process.env.SLACK_URL);
       this.$validator.validateAll().then(result => {
         if (result) {
           window.axios.defaults.headers.common['Content-Type'] =
