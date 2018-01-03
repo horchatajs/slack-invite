@@ -86,13 +86,13 @@
             Twitter o Meetup</p>
         </div>
         <div class="flex justify-center">
-          <a href="https://www.meetup.com/es/horchatajs/" target="_blank" class="mr-3 text-white hover:text-mt shadow p-2 hover:bg-white">
+          <a href="https://www.meetup.com/es/horchatajs/" target="_blank" class="mr-3 text-black hover:text-white p-2">
             <i class="fab fa-meetup fa-2x"></i>
           </a>
-          <a href="https://www.facebook.com/horchatajs/" target="_blank" class="mr-3 text-white hover:text-fb shadow p-2 hover:bg-white">
+          <a href="https://www.facebook.com/horchatajs/" target="_blank" class="mr-3 text-black hover:text-white p-2">
             <i class="fab fa-facebook fa-2x"></i>
           </a>
-          <a href="https://twitter.com/HorchataJS" target="_blank" class="text-white hover:text-tw shadow p-2 hover:bg-white">
+          <a href="https://twitter.com/HorchataJS" target="_blank" class="text-black hover:text-white p-2">
             <i class="fab fa-twitter fa-2x"></i>
           </a>
         </div>
