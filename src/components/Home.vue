@@ -60,7 +60,7 @@
               </g>
             </g>
           </svg>
-          <form @submit.prevent="invite" class="w-80 mx-auto">
+          <form @submit.prevent="invite" class="w-auto md:w-80 md:mx-auto mx-2">
             <input type="text"
                   name="email"
                   id="email"
