@@ -41,13 +41,13 @@
     <div class="relative flex flex-col justify-center my-4">
       <div class="pin-t pin-x text-center px-8">
         <div class="flex justify-center items-center">
-          <p class="font-bold md:text-2xl text-xl">Unete a nuestro Team de
+          <p class="font-bold md:text-2xl text-xl">Únete a nuestro espacio de
           <a href="https://slack.com/" target="_blank" class="-mx-2">
             <img src="~@/assets/slack.svg" alt="" class="h-auto w-32 align-middle">
           </a>
           para aprender de
           <img src="~@/assets/javascript.svg" alt="" class="h-auto w-10 mx-2 align-middle mb-2">
-          y Tecnologías web relacionadas.</p>
+          y tecnologías web relacionadas.</p>
         </div>
       </div>
 
@@ -82,9 +82,9 @@
                   id="email"
                   :class="{'input': true, 'border-red border-2': errors.has('email') }"
                   class="shadow appearance-none rounded w-70 py-2 px-3 text-grey-darker mb-2 focus:border-black"
-                  placeholder="Ingresa tu Correo Electrónico"
+                  placeholder="Ingresa tu correo electrónico"
                   v-validate="'required|email'"
-                  data-vv-as="Correo Electrónico"
+                  data-vv-as="Correo electrónico"
                   v-model="email">
             <p v-if="errors.has('email')" class="text-red text-xs italic">{{ errors.first('email') }}</p>
             <p v-else class="text-transparent text-xs italic">placeholder</p>
@@ -94,12 +94,12 @@
 
       <div class="pin-b pin-x text-center mx-4">
         <div class="mb-4 leading-normal">
-          <p class="tracking-wide">Canal de Slack:
+          <p class="tracking-wide">URL de espacio en Slack:
             <a href="https://horchatajs.slack.com/" target="_blank" class="text-black hover:text-yellow-darker font-bold">horchatajs.slack.com</a>
           </p>
           <p class="tracking-wide">Si tienes problemas con el registro, ponte en contacto con un administrador.
             <br> Puede encontrar los detalles de contacto en nuestra página de Facebook,
-            Twitter o en meetup.com</p>
+            Twitter o Meetup</p>
         </div>
         <div class="flex justify-center">
           <a href="https://www.meetup.com/es/horchatajs/" target="_blank" class="mr-3 text-white hover:text-mt shadow p-2 hover:bg-white">
@@ -118,56 +118,63 @@
 </template>
 
 <script>
-  import qs from 'qs'
-  import notie from 'notie'
-  export default {
-    data () {
-      return {
-        email: '',
-        messages: [
-          {'key': 'already_invited', 'value': 'Ya recibiste una invitación por correo electrónico'},
-          {'key': 'already_in_team', 'value': 'Ya eres parte del equipo'},
-          {'key': 'user_disabled', 'value': 'Tu usuario ha sido deshabilitado'},
-          {'key': 'invalid_email', 'value': 'Correo Electrónico invalido'}
-        ]
-      }
-    },
-    methods: {
-      invite () {
-        console.log(process.env.SLACK_URL)
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            window.axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-            window.axios.post(process.env.SLACK_URL, qs.stringify({
-              email: this.email,
-              token: process.env.SLACK_TOKEN
-            }))
+import qs from 'qs';
+import notie from 'notie';
+export default {
+  data() {
+    return {
+      email: '',
+      messages: [
+        {
+          key: 'already_invited',
+          value: 'Ya recibiste una invitación por correo electrónico',
+        },
+        { key: 'already_in_team', value: 'Ya eres parte del equipo' },
+        { key: 'user_disabled', value: 'Tu usuario ha sido deshabilitado' },
+        { key: 'invalid_email', value: 'Correo Electrónico inválido' },
+      ],
+    };
+  },
+  methods: {
+    invite() {
+      console.log(process.env.SLACK_URL);
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          window.axios.defaults.headers.common['Content-Type'] =
+            'application/x-www-form-urlencoded';
+          window.axios
+            .post(
+              process.env.SLACK_URL,
+              qs.stringify({
+                email: this.email,
+                token: process.env.SLACK_TOKEN,
+              }),
+            )
             .then(res => {
               if (res.data.error) {
-                this.noti(3, this.get_message(res.data.error))
+                this.noti(3, this.get_message(res.data.error));
               } else {
-                this.noti(1, 'Invitación enviada con exito')
+                this.noti(1, 'Invitación enviada con éxito');
               }
             })
             .catch(e => {
-              console.log('error', e)
-            })
-          }
-        })
-      },
-      noti (_type, message) {
-        return notie.alert({ type: _type, text: message })
-      },
-      get_message (key) {
-        return this.messages.find((item) => {
-          return item.key === key
-        })['value']
-      }
-    }
-  }
+              console.log('error', e);
+            });
+        }
+      });
+    },
+    noti(_type, message) {
+      return notie.alert({ type: _type, text: message });
+    },
+    get_message(key) {
+      return this.messages.find(item => {
+        return item.key === key;
+      })['value'];
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 
 </style>
