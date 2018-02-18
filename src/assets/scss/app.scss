@@ -30,7 +30,6 @@
  * @import "components/forms";
  */
 
-
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
@@ -59,14 +58,14 @@
  * @import "utilities/skew-transforms";
  */
 
- @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500');
- @import '~notie/src/notie';
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
+@import "~notie/src/notie";
 
- html, body {
-   font-family: 'Montserrat',
-   sans-serif;
- }
+html,
+body {
+  font-family: "Montserrat", sans-serif;
+}
 
- .object-fit {
-    object-fit: cover;
+.object-fit {
+  object-fit: cover;
 }

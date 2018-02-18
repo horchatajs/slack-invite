@@ -1,6 +1,6 @@
-# slack.invite
+# Slack Invitation HorchataJS
 
-> A Vue.js project
+> A Custom Slack Invitation for HorchataJS
 
 ## Build Setup
 

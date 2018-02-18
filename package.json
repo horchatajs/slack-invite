@@ -1,7 +1,7 @@
 {
-  "name": "slack.invite",
+  "name": "slack-invite",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Custom Slack Invitation for HorchataJS",
   "author": "César A. Ramírez <cesar.ramirez.sv@gmail.com>",
   "private": true,
   "scripts": {
@@ -18,9 +18,8 @@
     "dotenv-webpack": "^1.5.4",
     "notie": "^4.3.1",
     "qs": "^6.5.1",
-    "vee-validate": "^2.0.0",
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vee-validate": "^2.0.4",
+    "vue": "^2.5.13"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

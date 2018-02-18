@@ -102,62 +102,60 @@
 </template>
 
 <script>
-import qs from 'qs';
-import notie from 'notie';
+import qs from "qs";
+import notie from "notie";
+
 export default {
   data() {
     return {
-      email: '',
+      email: "",
       messages: [
         {
-          key: 'already_invited',
-          value: 'Ya recibiste una invitación por correo electrónico',
+          key: "already_invited",
+          value: "Ya recibiste una invitación por Correo Electrónico."
         },
-        { key: 'already_in_team', value: 'Ya eres parte del equipo' },
-        { key: 'user_disabled', value: 'Tu usuario ha sido deshabilitado' },
-        { key: 'invalid_email', value: 'Correo Electrónico inválido' },
-      ],
+        { key: "already_in_team", value: "Ya eres parte del equipo." },
+        { key: "user_disabled", value: "Tu usuario ha sido deshabilitado." },
+        { key: "invalid_email", value: "Correo Electrónico inválido." },
+        { key: "bad_invite_domain", value: "Dominio de Correo Electrónico invalido." },
+      ]
     };
   },
   methods: {
-    invite() {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          window.axios.defaults.headers.common['Content-Type'] =
-            'application/x-www-form-urlencoded';
-          window.axios
-            .post(
-              process.env.SLACK_URL,
-              qs.stringify({
-                email: this.email,
-                token: process.env.SLACK_TOKEN,
-              }),
-            )
-            .then(res => {
-              if (res.data.error) {
-                this.noti(3, this.get_message(res.data.error));
-              } else {
-                this.noti(1, 'Invitación enviada con éxito');
-              }
+    async invite() {
+      try {
+        const validate = await this.$validator.validateAll();
+
+        if (validate) {
+
+          const { data } = await axios.post(
+            process.env.SLACK_URL,
+            qs.stringify({
+              email: this.email,
+              token: process.env.SLACK_TOKEN
             })
-            .catch(e => {
-              console.log('error', e);
-            });
+          );
+
+          if (data.error) {
+            this.noti(3, this.get_message(data.error));
+          } else {
+            this.noti(1, "Invitación enviada con éxito");
+          }
         }
-      });
+      } catch (error) {
+        console.log(error);
+      }
     },
+
     noti(_type, message) {
       return notie.alert({ type: _type, text: message });
     },
+
     get_message(key) {
       return this.messages.find(item => {
         return item.key === key;
-      })['value'];
-    },
-  },
+      })["value"];
+    }
+  }
 };
 </script>
-
-<style scoped>
-
-</style>
